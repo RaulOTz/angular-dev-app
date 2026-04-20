@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +7,20 @@ import { Component } from '@angular/core';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class LoginComponent {
 
+  username = signal<string>('Admin');
+  password = signal<string>('dummy');
+  errorMessage = 'Invalid Credentials'
+  invalidLogin = false
+
+  handleLogin() {
+    // console.log(this.username + "-" + this.password());
+    if (this.username() === 'Admin' && this.password() === 'dummy') {
+      //this.router.navigate(['welcome', this.username]);     // redirect to table
+      this.invalidLogin = false;
+    } else {
+      this.invalidLogin = true;
+    }
+  }
 }
