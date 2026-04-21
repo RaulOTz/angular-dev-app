@@ -11,13 +11,4 @@ import { ApiService } from './services/api';
 export class App {
   protected title = 'frontend-angular-app';
 
-  data = '';
-
-  constructor(private apiService: ApiService) {
-    this.load();
-  }
-
-  load(){
-    this.apiService.getApi().subscribe({next: (res) => this.data = res, error: (err) => console.error(err)});
-  }
 }

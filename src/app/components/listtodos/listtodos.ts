@@ -1,4 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService, Todo } from '../../services/api';
+
+
 
 @Component({
   selector: 'app-listtodos',
@@ -8,14 +11,20 @@ import { Component, signal } from '@angular/core';
   styleUrl: './listtodos.css',
 })
 
-export class Listtodos {
-  todos = signal([
-    { id: 1, description: 'Learn to Dance' },
-    { id: 2, description: 'Become an Expert at Angular' },
-    { id: 3, description: 'Visit India' }
-  ])
-  
+export class Listtodos implements OnInit{
 
+  todos: Todo[] = [];
+
+  constructor(private todoService: ApiService) {}
+
+  ngOnInit(): void {
+    this.todoService.getTodos().subscribe(data => {
+      this.todos = data;
+    });
+  }
 }
+
+
+
 
 
